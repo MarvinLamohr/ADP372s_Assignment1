@@ -1,46 +1,64 @@
 package za.ac.cput.ADP372s_Assignment1;
+/**
+ * 218147856
+ * Lefu Kumeke
+ *
+ * ADP3 ASSIGNMENT 2021
+ *
+ *
+ *
+ */
 
-import org.junit.jupiter.api.*;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
+import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestDrivenDevelopmentTest {
-private TestDrivenDevelopmentTest  tdd1;
-private TestDrivenDevelopmentTest  tdd2;
-private TestDrivenDevelopmentTest tdd3;
 
-@BeforeEach
-    void setupTest(){
-    tdd1 = new TestDrivenDevelopmentTest();
-    tdd2= tdd3;
-    tdd3= tdd3;
-}
-    @Test
-    void testIdentity()
-    {
-        assertSame(tdd2,tdd3);
-    }
-    @Test
-    void testEquality(){
-    assertEquals(tdd3,tdd3);
-    }
-    @Test
-    void testGetId(){
-        fail("Not implemented");
-        assertEquals(tdd3,tdd3);
-    }
-    @Test
-    @Disabled
-    @DisplayName("This method should not run")
-    void testDisabled(){
-        fail("this test method should be disabled");
+    private TestDrivenDevelopment person1;
+    private TestDrivenDevelopment person2;
+    private int Monday;
+    private int Friday;
 
+    @BeforeEach
+    void setUp() {
+
+        person1 = new TestDrivenDevelopment();
+        person2 = new TestDrivenDevelopment();
+        Monday = 10;
+        Friday = 10;
     }
+
     @Test
-    @Timeout(5)
-    public void timeoutTest() throws InterruptedException{
-        Thread.sleep(500);
-        System.out.println("Test will passed with in the time");
+    void testObjectIdentity() {
+        assertSame(person1, person2);
+    }
+
+    @Test
+    void testObjectEquality() {
+        assertEquals(person1, person2);
+    }
+
+    @Test
+    void failingTest() {
+        fail("This test will fail");
+        assertEquals(Monday, Friday);
+    }
+
+    @Test
+    @Timeout(6)
+    public void timeoutTest() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(5);
+        System.out.println("Test passed within the given time");
+    }
+
+    @Disabled("This option is disabled")
+    @Test
+    void disablingTest() {
+        assertTrue(2 > 0);
     }
 }
 
